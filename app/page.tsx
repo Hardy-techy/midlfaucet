@@ -5,12 +5,13 @@ import {
     useAddTxIntention,
     useFinalizeBTCTransaction,
     useSignIntention,
+    useEVMAddress,
 } from "@midl/executor-react";
 import { useAddNetwork } from "@midl/react";
 import { encodeFunctionData } from "viem";
 import { FAUCET_ADDRESS } from "../config";
 import { useState, useEffect } from "react";
-import { useAccount, usePublicClient } from "wagmi";
+import { usePublicClient } from "wagmi";
 
 export default function FaucetPage() {
     const [status, setStatus] = useState<string | null>(null);
@@ -24,7 +25,7 @@ export default function FaucetPage() {
     const { addTxIntentionAsync } = useAddTxIntention();
     const { finalizeBTCTransactionAsync } = useFinalizeBTCTransaction();
     const { signIntentionAsync } = useSignIntention();
-    const { address: userEVMAddress } = useAccount();
+    const userEVMAddress = useEVMAddress();
     const publicClient = usePublicClient();
     const { addNetwork } = useAddNetwork();
 
